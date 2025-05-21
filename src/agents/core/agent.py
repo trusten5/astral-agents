@@ -26,9 +26,9 @@ from typing_extensions import NotRequired, TypeAlias, TypedDict, TypeVar
 # from .models import Model, ModelSettings
 # from .tools import Tool, function_tool
 # from .mcp import MCPServer, MCPConfig, MCPUtil
-# from .guards import InputGuardrail, OutputGuardrail
+from guardrail import InputGuardrail, OutputGuardrail
 # from .agent_hooks import AgentHooks
-# from .handoff import Handoff
+# from handoff import Handoff
 # from .run_result import RunResult, ItemHelpers
 # from .utils import _transforms, logger, MaybeAwaitable, StopAtTools, \
 #     ToolsToFinalOutputFunction, ToolToFinalOutputResult, AgentOutputSchemaBase
@@ -55,6 +55,9 @@ class Agent(Generic[TContext]):
     name: str
     instructions: str | Callable[[RunContextWrapper[TContext], Agent[TContext]],
                                  MaybeAwaitable[str]] | None = None
+    # `instructions` can be a static string or a function returning a string.
+    # This allows agents to have either fixed prompts or context-aware dynamic prompts.
+
     handoff_description: str | None = None
     handoffs: list[Agent[Any] | Handoff[TContext]] = field(default_factory=list)
 
