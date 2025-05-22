@@ -21,6 +21,8 @@ from typing_extensions import TypeAlias
 
 # Internal ----------------------------------------------------------------------
 from exceptions import AgentsException, ModelBehaviorError
+from ._share import RunItemBase, ResponseOutputMessage, TResponseInputItem, FunctionCallOutput, ComputerCallOutput, TResponseOutputItem
+# from .usage import Usage
 
 if TYPE_CHECKING:
     from agent import Agent
